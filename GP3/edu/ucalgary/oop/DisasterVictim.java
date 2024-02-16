@@ -1,6 +1,9 @@
 package edu.ucalgary.oop;
 
-import org.junit.*;
+import java.util.Objects;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DisasterVictim {
     private String firstName;
@@ -13,16 +16,26 @@ public class DisasterVictim {
     private String ENTRY_DATE;
     private Supply[] personalBelongings;
     private String gender;
-    private int counter;
+    private static int counter;
+    private static final String REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
 
-    public DisasterVictim(String firstName, String ENTRY_DATE) {
-        this.firstName = firstName;
-        this.ENTRY_DATE = ENTRY_DATE;
-        // Initialize arrays with empty arrays
-        this.medicalRecords = new MedicalRecord[0];
-        this.familyConnections = new FamilyRelation[0];
-        this.personalBelongings = new Supply[0];
+    public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException {
+        Matcher matcher = PATTERN.matcher(ENTRY_DATE);
+        if (matcher.matches()) {
+            this.firstName = firstName;
+            this.ENTRY_DATE = ENTRY_DATE;
+            // Initialize arrays with empty arrays
+            this.medicalRecords = new MedicalRecord[0];
+            this.familyConnections = new FamilyRelation[0];
+            this.personalBelongings = new Supply[0];
+            this.ASSIGNED_SOCIAL_ID = counter;
+            DisasterVictim.counter += 1;
+        } else {
+            throw new IllegalArgumentException("Invalid date format: " + ENTRY_DATE);
+        }
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -73,11 +86,28 @@ public class DisasterVictim {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
+        if (!isValidDateFormat(dateOfBirth)) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
+
         this.dateOfBirth = dateOfBirth;
     }
 
+    private boolean isValidDateFormat(String date) {
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
+
+
+
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public void setAssignedSocialID(int socialID) {
+        if (socialID <= 0) {
+            throw new IllegalArgumentException("Social ID must be a positive integer");
+        }
+        this.ASSIGNED_SOCIAL_ID = socialID;
     }
 
     public void setMedicalRecords(MedicalRecord[] medicalRecords) {
@@ -114,9 +144,9 @@ public class DisasterVictim {
         // You might want to implement more logic here (e.g., shifting elements)
         Supply[] newPersonalBelongings = new Supply[personalBelongings.length - 1];
         int index = 0;
-        for (int i = 0; i < personalBelongings.length; i++) {
-            if (personalBelongings[i] != supply) {
-                newPersonalBelongings[index++] = personalBelongings[i];
+        for (Supply personalBelonging : personalBelongings) {
+            if (!personalBelonging.equals(supply)) {
+                newPersonalBelongings[index++] = personalBelonging;
             }
         }
         personalBelongings = newPersonalBelongings;
@@ -134,9 +164,9 @@ public class DisasterVictim {
         // Similar logic for removing a family connection from the array
         FamilyRelation[] newFamilyConnections = new FamilyRelation[familyConnections.length - 1];
         int index = 0;
-        for (int i = 0; i < familyConnections.length; i++) {
-            if (familyConnections[i] != familyConnection) {
-                newFamilyConnections[index++] = familyConnections[i];
+        for (FamilyRelation family : familyConnections) {
+            if (!family.equals(familyConnection)) {
+                newFamilyConnections[index++] = family;
             }
         }
         familyConnections = newFamilyConnections;
@@ -149,7 +179,38 @@ public class DisasterVictim {
         newMedicalRecords[medicalRecords.length] = medicalRecord;
         medicalRecords = newMedicalRecords;
     }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        DisasterVictim otherVictim = (DisasterVictim) obj;
+        return Objects.equals(firstName, otherVictim.firstName)
+                && Objects.equals(lastName, otherVictim.lastName)
+                && Objects.equals(dateOfBirth, otherVictim.dateOfBirth)
+                && Objects.equals(ENTRY_DATE, otherVictim.ENTRY_DATE)
+                && Objects.equals(gender, otherVictim.gender)
+                && ASSIGNED_SOCIAL_ID == otherVictim.ASSIGNED_SOCIAL_ID
+                && Arrays.equals(medicalRecords, otherVictim.medicalRecords)
+                && Arrays.equals(familyConnections, otherVictim.familyConnections)
+                && Arrays.equals(personalBelongings, otherVictim.personalBelongings);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(firstName, lastName, dateOfBirth, ENTRY_DATE, gender, ASSIGNED_SOCIAL_ID);
+        result = 31 * result + Arrays.hashCode(medicalRecords);
+        result = 31 * result + Arrays.hashCode(familyConnections);
+        result = 31 * result + Arrays.hashCode(personalBelongings);
+        return result;
+    }
 }
+
+
+
 
 
 
