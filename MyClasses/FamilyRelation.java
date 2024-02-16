@@ -1,42 +1,39 @@
-package MyClasses;
+package edu.ucalgary.oop;
+
+import org.junit.*;
 
 public class FamilyRelation {
-    private DisasterVictim[] personOne = new DisasterVictim[10];
+    private DisasterVictim personOne;
     private String relationshipTo;
-    private DisasterVictim[] personTwo = new DisasterVictim[10];
+    private DisasterVictim personTwo;
 
-    /* Constructors */
-    public FamilyRelation(DisasterVictim[] personOne, String relationshipTo, 
-    DisasterVictim[] personTwo){
-        this.setPersonOne();
-        this.setRelationshipTo();
-        this.setPersonTwo();
+    public FamilyRelation(DisasterVictim personOne, String relationshipTo, DisasterVictim personTwo) {
+        this.personOne = personOne;
+        this.relationshipTo = relationshipTo;
+        this.personTwo = personTwo;
     }
 
-
-
-    /* Setters */
-    public void setPersonOne(DisasterVictim[] personOne){
-
-    }
-
-    public void setRelationshipTo(String relationshipTo){
-
-    }
-
-    public void setPersonTwo(DisasterVictim[] personTwo){
-
-    }
-
-
-    /* Getters */
-
-    public DisasterVictim[] getPersonOne() {
+    public DisasterVictim getPersonOne() {
         return personOne;
     }
-    public String getRelationshipTo() {return this.relationshipTo;}
-    public DisasterVictim[] getPersonTwo(){
+
+    public void setPersonOne(DisasterVictim personOne) {
+        this.personOne = personOne;
+    }
+
+    public String getRelationshipTo() {
+        return relationshipTo;
+    }
+
+    public void setRelationshipTo(String relationshipTo) {
+        this.relationshipTo = relationshipTo;
+    }
+
+    public DisasterVictim getPersonTwo() {
         return personTwo;
     }
-    
+
+    public void setPersonTwo(DisasterVictim personTwo) {
+        this.personTwo = personTwo;
+    }
 }
