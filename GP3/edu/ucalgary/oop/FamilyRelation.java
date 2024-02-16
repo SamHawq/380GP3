@@ -37,3 +37,4 @@ public class FamilyRelation {
         this.personTwo = personTwo;
     }
 }
+
