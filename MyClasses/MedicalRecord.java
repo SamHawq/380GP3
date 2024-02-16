@@ -1,35 +1,41 @@
-package MyClasses;
+package edu.ucalgary.oop;
+
+import org.junit.*;
+
 
 public class MedicalRecord {
-    private Location[] location = new Location[3];
+    private Location location;
     private String treatmentDetails;
     private String dateOfTreatment;
 
-    /* Constructors */
-    public MedicalRecord(Location[] location, String treatmentDetails, 
-    String dateOfTreatment){
-        this.setPersonOne();
-        this.setRelationshipTo();
-        this.setPersonTwo();
+    public MedicalRecord(Location location, String treatmentDetails, String dateOfTreatment) {
+        this.location = location;
+        this.treatmentDetails = treatmentDetails;
+        this.dateOfTreatment = dateOfTreatment;
     }
 
-    /* Setters */
-    public void setLocation(Location[] location){
-
+    public Location getLocation() {
+        return location;
     }
 
-    public void setTreatmentDetails(String treatmentDetails){
-
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setDateOfTreatment(String dateOfTreatment){
-
+    public String getTreatmentDetails() {
+        return treatmentDetails;
     }
 
+    public void setTreatmentDetails(String treatmentDetails) {
+        this.treatmentDetails = treatmentDetails;
+    }
 
-    /* Getters */
+    public String getDateOfTreatment() {
+        return dateOfTreatment;
+    }
 
-    public Location[] getLocation() {return location;}
-    public String getTreatmentDetails() {return this.treatmentDetails;}
-    public String getDateOfTreatment() {return this.dateOfTreatment;}
+    public void setDateOfTreatment(String dateOfTreatment) {
+        this.dateOfTreatment = dateOfTreatment;
+    }
 }
+
