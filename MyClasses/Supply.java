@@ -1,29 +1,29 @@
-package MyClasses;
+package edu.ucalgary.oop;
 
+
+import org.junit.*;
 public class Supply {
     private String type;
-    private int quanity;
+    private int quantity;
 
-    /* Constructors */
-    public Supply(String type, int quanity){
-        this.setType();
-        this.setQuantity();
+    public Supply(String type, int quantity) {
+        this.type = type;
+        this.quantity = quantity;
     }
 
-
-
-    /* Setters */
-    public void setType(String type){
-
+    public String getType() {
+        return type;
     }
 
-    public void setQuantity(int quanity){
-
+    public void setType(String type) {
+        this.type = type;
     }
 
-    /* Getters */
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public String getType() {return this.type;}
-    public int getQuantity() {return this.quanity;}
-    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
