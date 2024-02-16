@@ -1,52 +1,71 @@
-package MyClasses;
+package edu.ucalgary.oop;
+
+import org.junit.*;
+
 
 public class ReliefService {
-    private Inquirer[] inquirer = new Inquirer[4];
-    private DisasterVictim[] missingPerson = new DisasterVictim[10];
+    private Inquirer inquirer;
+    private DisasterVictim missingPerson;
     private String dateOfInquiry;
     private String infoProvided;
-    private Location[] lastKnownLocation = new Location[4];
+    private Location lastKnownLocation;
+
+    public ReliefService(Inquirer inquirer, DisasterVictim missingPerson, String dateOfInquiry,
+                         String infoProvided, Location lastKnownLocation) {
+        this.inquirer = inquirer;
+        this.missingPerson = missingPerson;
+        this.dateOfInquiry = dateOfInquiry;
+        this.infoProvided = infoProvided;
+        this.lastKnownLocation = lastKnownLocation;
+    }
+
+    public Inquirer getInquirer() {
+        return inquirer;
+    }
+
+    public void setInquirer(Inquirer inquirer) {
+        this.inquirer = inquirer;
+    }
+
+    public DisasterVictim getMissingPerson() {
+        return missingPerson;
+    }
+
+    public void setMissingPerson(DisasterVictim missingPerson) {
+        this.missingPerson = missingPerson;
+    }
+
+    public String getDateOfInquiry() {
+        return dateOfInquiry;
+    }
+
+    public void setDateOfInquiry(String dateOfInquiry) {
+        this.dateOfInquiry = dateOfInquiry;
+    }
+
+    public String getInfoProvided() {
+        return infoProvided;
+    }
+
+    public void setInfoProvided(String infoProvided) {
+        this.infoProvided = infoProvided;
+    }
+
+    public Location getLastKnownLocation() {
+        return lastKnownLocation;
+    }
+
+    public void setLastKnownLocation(Location lastKnownLocation) {
+        this.lastKnownLocation = lastKnownLocation;
+    }
+
+
+    public String getLogDetails() {
+        // Assuming you want to concatenate relevant details for logging
+        return "Inquirer: " + inquirer.getFirstName() + " " + inquirer.getLastName()
+                + ", Missing Person: " + missingPerson.getFirstName() + " " + missingPerson.getLastName()
+                + ", Date of Inquiry: " + dateOfInquiry + ", Info Provided: " + infoProvided
+                + ", Last Known Location: " + lastKnownLocation.getName();
+    }
     
-
-    /* Constructors */
-    public ReliefService(Inquirer[] inquirer, 
-    DisasterVictim[] missingPerson, String dateOfInquiry, String infoProvided,
-    Location[] lastKnownLocation){
-        this.setInquirer();
-        this.setMissingPerson();
-        this.setDateOfInquiry();
-        this.setInfoProvided();
-        this.setLastKnownLocation();
-    }
-
-
-
-    /* Setters */
-    public void setInquirer(Inquirer[] inquirer){
-
-    }
-
-    public void setMissingPerson(DisasterVictim[] missingPerson){
-
-    }
-
-    public void setDateOfInquiry(String dateOfInquirer){
-
-    }
-
-    public void setInfoProvided(String infoProvided){
-
-    }
-
-    public void setLastKnownLocation(Location[] lastKnownLocation){
-
-    }
-
-    /* Getters */
-
-    public String getInquirer() {return this.inquirer;}
-    public DisasterVictim[] getMissingPerson() {return this.missingPerson;}
-    public String getDateOfInquiry() {return this.dateOfInquiry;}
-    public String getInfoProvided() {return this.infoProvided;}
-    public Location[] getLastKnownLocation() {return lastKnownLocation;}
 }
