@@ -67,5 +67,3 @@ public class Location {
         this.supplies.remove(supply);
     }
 }
-
-
